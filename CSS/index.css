@@ -227,6 +227,13 @@ footer {
     background: #114B83;
 }
 
+#particles-js{
+    height: 20vh;
+    width: 100%;
+    position:fixed;
+    z-index: 10;
+}
+
 
 
 
