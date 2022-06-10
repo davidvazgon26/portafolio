@@ -45,12 +45,6 @@ nav ul {
     margin-bottom: 5vh;
 }
 
-.experiencia {
-    color: #fff;
-    text-align: center;
-    padding: 20vh;
-}
-
 .pfTitulo {
     width: 100%;
     left: 84px;
@@ -127,6 +121,8 @@ footer {
     position: relative;
     border-top-left-radius: 36px;
     border-top-right-radius: 36px;
+    position: relative;
+    top: -30vh;
 
 }
 
@@ -136,6 +132,7 @@ footer {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    padding: 4vh;
 
 }
 
@@ -216,23 +213,259 @@ footer {
     text-align: center;
 }
 
+.experiencia {
+    color: #fff;
+    text-align: center;
+    /* padding: 20vh; */
+
+}
+
 .exp {
     width: 100%;
-    height: 558px;
-    left: -1px;
-    top: 544px;
+    height: auto;
+    /* left: -1px;
+    top: 544px; */
 
     /* Azul */
-
     background: #114B83;
 }
 
-#particles-js{
-    height: 20vh;
-    width: 100%;
-    position:fixed;
-    z-index: 10;
+
+.trianguloEquilatero {
+    height: 20px;
+    border-right: 100vw solid #114B83;
+    border-top: 75px solid transparent;
+    margin-bottom: 5vh;
 }
+
+#particles-js {
+    width: 100%;
+    /* height: 100%; */
+    position: absolute;
+    /* background-color: #000 */
+    z-index: -2;
+}
+
+.trianguloInvertido {
+
+    background: #fff;
+    border-left: 50vw solid #114B83;
+    border-right: 50vw solid #114B83;
+    border-top: 10vh solid transparent;
+    /* border-bottom: 33vh solid transparent; */
+    /* transform: rotate(90deg);*/
+}
+
+.trianguloInvertido2 {
+
+    background: #114B83;
+    border-left: 52vw solid #fff;
+    border-right: 44vw solid #fff;
+    border-top: 44vh solid transparent;
+    /* border-bottom: 33vh solid transparent; */
+    /* transform: rotate(90deg);*/
+}
+
+.contExp {
+    margin-left: 4vw;
+
+}
+
+.anio {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 5vw;
+    line-height: 3vh;
+    /* identical to box height */
+    text-align: left;
+    /* Contraste */
+    color: #F7D732;
+}
+
+.title {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 4.3vw;
+    line-height: 5vh;
+    /* identical to box height */
+
+    text-align: left;
+
+    color: #FFFFFF;
+}
+
+.descriptionEx {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 200;
+    font-size: 3vw;
+    line-height: 2.5vh;
+    color: #FFFFFF;
+    padding-bottom: 2.5vh;
+}
+
+.containerPDP {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.containerFondoPDP {
+    width: 100%;
+    height: auto;
+    background: #413D3D;
+    position: relative;
+    top: -25vh;
+    /* border-top-right-radius: 100%; */
+    border-radius: 0px 30vh;
+    padding: 3vw;
+}
+
+.portProyect {
+    width: 100%;
+    color: #fff;
+    text-align: center;
+    padding-top: 10vh;
+}
+
+.contPort {
+    /* border: 2px solid white; */
+    margin: 12vw 10vw;
+}
+
+.contPortTitle {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 5vw;
+    line-height: 17px;
+    /* height:200px; */
+    /* identical to box height */
+    margin-bottom: 2vh;
+
+    text-align: left;
+
+    color: #FFFFFF;
+}
+
+.imgPortafolio {
+    width: 76vw;
+    border-radius: 14px;
+}
+
+.pPortafolio {
+    width: 100%;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 200;
+    font-size: 4.2vw;
+    line-height: 3.4vh;
+    /* or 110% */
+
+    text-align: center;
+    margin-top: 2vh;
+
+    /* Fondo */
+    color: #FFFFFF;
+}
+
+.pLink {
+    color: #F7D732;
+    text-decoration: none;
+}
+
+.containerContacto {
+    padding: 4vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.contactoTitle {
+    width: 100%;
+    color: #413D3D;
+    text-align: center;
+    position: relative;
+    top: -26vh;
+    z-index: 16;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    /* background: black; */
+    /* margin: 10%; */
+    width: 60vw;
+    background: #fff;
+    border: 2px solid #114B83;
+    border-radius: 14px;
+    padding: 7vw;
+    position: relative;
+    top: -24vh;
+}
+
+.labelContact {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 3vw;
+    line-height: 12px;
+
+    /* Azul */
+    color: #114B83;
+
+    padding: 2.5vw;
+}
+
+.inputContact {
+    /* width: 26vw; */
+    /* margin-left: 50vw; */
+    height: 4vh;
+    border: 2px solid #114B83;
+    border-radius: 4px;
+    filter: drop-shadow(5px 8px 1px rgba(0, 0, 0, 0.25));
+}
+
+
+.textAreaContact {
+    /* width: 16vw;
+    margin-left: 10vw; */
+    border: 2px solid #114B83;
+    border-radius: 4px;
+    filter: drop-shadow(5px 8px 1px rgba(0, 0, 0, 0.25));
+}
+
+.btnContact {
+    width: 18vw;
+    height: 4vh;
+    left: 96px;
+    top: 2716px;
+    background: transparent;
+    color: #114B83;
+    border: 1.8px solid #114B83;
+    border-radius: 4px;
+    margin: 7vw 35% 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: all;
+}
+
+.btnContact img {
+    width: 3vw;
+    margin-left: 1vw;
+}
+
+.btnContact:hover {
+    background: #413D3D;
+    color: #fff;
+    transform: scale(1.2);
+}
+
+
 
 
 
