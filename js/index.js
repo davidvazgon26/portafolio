@@ -27,3 +27,19 @@ const likes = [
   }, 1500);
 
   // End hero-styles
+
+  const menu = () =>{
+    console.log("Click a menu desde js")
+  }
+
+
+  // Para cerrar menu
+
+  const menuLinks = document.querySelectorAll('.navBurger a[href^="#"]');
+
+  menuLinks.forEach(link => {
+    link.addEventListener("click", ()=> {
+      //console.log("hiciste click en el enlace");
+      document.getElementById("check").checked = true;
+    })
+  })
