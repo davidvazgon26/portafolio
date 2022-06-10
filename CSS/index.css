@@ -3,15 +3,118 @@
     padding: 0;
 }
 
+html{
+    scroll-behavior: smooth;
+}
+
 
 .logo {
     width: 12vw;
     margin-left: 2vw;
 }
 
+/* .btnBurger{
+    border: none;
+    color: transparent;
+    pointer-events: all;
+}
+
+.btnBurger:hover{
+    transform: scale(1.1);
+} */
+
+header{
+    background: white;
+    height: 15vh;
+}
+
+nav{
+    position: fixed;
+    width: 100%;
+    background:white;
+    z-index: 100;
+}
+
+section[id]{
+    scroll-margin-top: 22vh;
+}
+
+
+
+.containerMenuBurger {
+    display: flex;
+    flex-direction: column;
+
+}
+
 .menu-burger {
     width: 7.5vw;
     margin-right: 2vw;
+}
+
+.bar-btn {
+    position: relative;
+    top: 0.5vh;
+    right: 2vw;
+    text-align: right;
+}
+
+.navBurger {
+    background: white;
+    list-style: none;
+    position: fixed;
+    text-align: center;
+
+    top: 15vh;
+    right: 5vw;
+    z-index: 20;
+    border-radius: 4px;
+    padding: 2vw;
+    width: 30vw;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.navBurger li {
+    margin-bottom: 2vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navBurger li:hover{
+    background: #413D3D;
+    color: white;
+    transform: scale(1.1);
+    transition: all 0.8s;
+
+
+}
+
+.navBurger li a {
+    text-decoration: none;
+    color: #413D3D;
+    padding: 1vh;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 3vw;
+    line-height: 17px;
+    width: 100%;
+ 
+}
+
+.navBurger li a:hover {
+    color: white
+}
+
+#check{
+    display: none;
+}
+
+#check:checked ~ .navBurger {
+    display: none ;
+   
 }
 
 .menu-chico {
@@ -24,7 +127,7 @@
 
 
 
-nav ul {
+.navAll {
     display: none;
 }
 
@@ -472,8 +575,12 @@ footer {
 
 @media screen and (min-width: 768px) {
     .logo {
-        width: 20vw;
-        height: 20vh;
+        width: 5vw;
+    }
+    .pfTitulo{
+        font-size: 3vw;
+        text-align: left;
+        margin-left: 10vw;;
     }
 
     nav ul {
@@ -495,9 +602,62 @@ footer {
         font-family: 'Roboto', sans-serif;
     }
 
+
+
     .menu-burger {
         display: none;
     }
 
+    #check:checked ~ .navBurger {
+        display: flex ;
+    }
+
+    .navBurger {
+        background: blue;
+        position: initial;
+        text-align: center;
+        
+        top: 0;
+        right: 0;
+        z-index: 20;
+        border-radius: 0;
+        padding: 0;
+        width: 0;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0);
+    }
+    
+    
+    .navBurger li a {
+        font-size: 1.8vw;
+    }
+    
+    .content-resumen{
+        height:42vh;
+    }
+
+    .resumen{
+        line-height: 2.5rem;
+    }
+
+    .foto-perfil{
+        height:15vw;
+        margin-right: 5vw;
+    }
+
+    .btn{
+        width: 18vw;
+        margin: 1vw;
+    }
+
+    .btn:hover{
+        transform: scale(1.1);
+    }
+
+    .btn-btn{
+        width:18vw;
+        font-size: 2.2vw;
+
+    }
+  
 
 }
