@@ -127,6 +127,7 @@ section[id]{
 
 
 
+
 .navAll {
     display: none;
 }
@@ -149,7 +150,7 @@ section[id]{
 }
 
 .pfTitulo {
-    width: 100%;
+    width: 80%;
     left: 84px;
     top: 23px;
 
@@ -176,7 +177,7 @@ hr {
 
 .foto-perfil {
     width: 22vw;
-    height: 22vw;
+    height: 16vw;
     border-radius: 100%;
     transform: scaleX(-1);
     margin-right: 4vw;
@@ -203,7 +204,8 @@ hr {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: 20vh;
+    height: 30vh;
+    margin-top: 4vh;;
 }
 
 .blue {
@@ -225,7 +227,7 @@ footer {
     border-top-left-radius: 36px;
     border-top-right-radius: 36px;
     position: relative;
-    top: -30vh;
+    top: -0;
 
 }
 
@@ -292,6 +294,10 @@ footer {
 
 }
 
+.btn:hover {
+    transform: scale(1.1);
+}
+
 .btn-img {
     width: 4vw;
     margin-left: 1vw;
@@ -335,9 +341,9 @@ footer {
 
 
 .trianguloEquilatero {
-    height: 20px;
-    border-right: 100vw solid #114B83;
-    border-top: 75px solid transparent;
+    height: 24px;
+    border-right: 98vw solid #114B83;
+    border-top: 78px solid transparent;
     margin-bottom: 5vh;
 }
 
@@ -352,8 +358,8 @@ footer {
 .trianguloInvertido {
 
     background: #fff;
-    border-left: 50vw solid #114B83;
-    border-right: 50vw solid #114B83;
+    border-left: 49vw solid #114B83;
+    border-right: 49vw solid #114B83;
     border-top: 10vh solid transparent;
     /* border-bottom: 33vh solid transparent; */
     /* transform: rotate(90deg);*/
@@ -362,8 +368,8 @@ footer {
 .trianguloInvertido2 {
 
     background: #114B83;
-    border-left: 52vw solid #fff;
-    border-right: 44vw solid #fff;
+    border-left: 49vw solid #fff;
+    border-right: 49vw solid #fff;
     border-top: 44vh solid transparent;
     /* border-bottom: 33vh solid transparent; */
     /* transform: rotate(90deg);*/
@@ -402,7 +408,7 @@ footer {
 .descriptionEx {
     font-family: 'Inter';
     font-style: normal;
-    font-weight: 200;
+    font-weight: 100;
     font-size: 3vw;
     line-height: 2.5vh;
     color: #FFFFFF;
@@ -423,7 +429,7 @@ footer {
     top: -25vh;
     /* border-top-right-radius: 100%; */
     border-radius: 0px 30vh;
-    padding: 3vw;
+    /* padding: 3vw; */
 }
 
 .portProyect {
@@ -570,6 +576,25 @@ footer {
 
 
 
+@media screen and (min-width: 600px) { 
+
+    .anio{
+        font-size: 3.8vw;
+    }
+
+    .title{
+        font-size: 3.8vw;
+    }
+
+    .descriptionEx{
+        font-size: 2.3vw;
+    }
+
+    .pPortafolio{
+        font-size: 3.2vw;
+    }
+}
+
 
 
 
@@ -581,6 +606,10 @@ footer {
         font-size: 3vw;
         text-align: left;
         margin-left: 10vw;;
+    }
+
+    nav{
+        width: 100%;
     }
 
     nav ul {
@@ -628,36 +657,139 @@ footer {
     
     
     .navBurger li a {
-        font-size: 1.8vw;
+        font-size: 1.6vw;
     }
     
     .content-resumen{
-        height:42vh;
+        height:36vh;
     }
 
     .resumen{
-        line-height: 2.5rem;
+        line-height: 4vw;
+        font-size: 3vw;
     }
 
     .foto-perfil{
         height:15vw;
-        margin-right: 5vw;
+        margin-right: 12vw;
     }
 
-    .btn{
-        width: 18vw;
-        margin: 1vw;
+
+
+    .btn {
+        margin: 1vw 3vw;
+        width: 14vw;
+        padding: 0.5vw;
+        border-radius: 14px;
+        font-size: 2vw;
+    }
+    
+    .btn-img {
+        width: 2.4vw;
+    }
+    
+    .habilidades {
+        font-size: 3vw;
     }
 
-    .btn:hover{
-        transform: scale(1.1);
+    .btn-btn {
+        width: 16vw;
+        padding: 1.6vw;
+        font-size: 2.4vw;
+        line-height: 16px;
     }
 
-    .btn-btn{
-        width:18vw;
-        font-size: 2.2vw;
+    .experiencia {
+        font-size: 3vw;
+        padding-bottom: 4vh;
+    }
+
+
+    .portProyect{
+        font-size:3vw;
+    }
+
+
+    .anio {
+        font-size: 2.5vw;
+        line-height: 5vh;
+    }
+    
+    .title {
+        font-size: 2.5vw;
+        line-height: 9vh;
+    }
+    
+    .descriptionEx {
+        font-weight: 200;
+        font-size: 2vw;
+        line-height: 5vh;
+        padding-bottom: 6vh;
+        margin-right: 6vw;
+    }
+
+    .contPortTitle{
+        font-size: 3vw;
+        padding: 1.5vw;
+    }
+
+    .pPortafolio{
+        font-size: 2.6vw;
+        line-height: 6vh;
+    }
+
+    .portProyect {
+        padding-top: 18vh;
 
     }
-  
+
+    .containerFondoPDP {
+        top: -18vh;
+    }
+
+    .contPort {
+        margin: 8vw 10vw;
+    }
+
+    .contactoTitle{
+        font-size: 3vw;
+    }
+   
+   .labelContact{
+    font-size: 1.6vw;
+    padding:1.2vw;
+   }
+
+   .inputContact{
+    height: 4vh;
+   }
+
+   .btnContact{
+    width: 12vw;
+    height: 6vh;
+    margin: 3vw 39% 0;
+   }
+
+   .btnContact img{
+    width: 2.4vw;
+   }
+
+   .form{
+    padding: 2vw;
+    width:38%
+   }
+
+   .footer-container{
+    padding: 4vh;
+   }
+
+   footer{
+    top: 0vh;
+   }
+
+   .containerContacto{
+    position: relative;
+    top:12vh;
+   }
 
 }
