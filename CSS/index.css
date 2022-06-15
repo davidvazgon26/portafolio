@@ -357,7 +357,7 @@ footer {
 
 .trianguloInvertido {
 
-    background: #fff;
+    /* background: #fff; */
     border-left: 49vw solid #114B83;
     border-right: 49vw solid #114B83;
     border-top: 10vh solid transparent;
@@ -417,12 +417,12 @@ footer {
 
 .containerPDP {
     width: 100%;
-    margin: 0;
+    margin: 0 0 0 7vw;
     padding: 0;
 }
 
 .containerFondoPDP {
-    width: 100%;
+    width: 90%;
     height: auto;
     background: #413D3D;
     position: relative;
@@ -433,7 +433,7 @@ footer {
 }
 
 .portProyect {
-    width: 100%;
+    width: 86%;
     color: #fff;
     text-align: center;
     padding-top: 10vh;
@@ -441,7 +441,7 @@ footer {
 
 .contPort {
     /* border: 2px solid white; */
-    margin: 12vw 10vw;
+    margin: 12vw 7vw;
 }
 
 .contPortTitle {
@@ -478,6 +478,7 @@ footer {
 
     /* Fondo */
     color: #FFFFFF;
+    margin-bottom: 7vh;
 }
 
 .pLink {
@@ -740,6 +741,7 @@ footer {
 
     .portProyect {
         padding-top: 18vh;
+        font-size: 4.5vw;
 
     }
 
@@ -748,7 +750,7 @@ footer {
     }
 
     .contPort {
-        margin: 8vw 10vw;
+        margin: 8vw 7vw;
     }
 
     .contactoTitle{
@@ -776,7 +778,7 @@ footer {
 
    .form{
     padding: 2vw;
-    width:38%
+    width:46%
    }
 
    .footer-container{
