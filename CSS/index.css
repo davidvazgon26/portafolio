@@ -5,6 +5,7 @@
 
 html{
     scroll-behavior: smooth;
+    width: 100%;
 }
 
 
@@ -342,7 +343,7 @@ footer {
 
 .trianguloEquilatero {
     height: 24px;
-    border-right: 98vw solid #114B83;
+    border-right: 97vw solid #114B83;
     border-top: 78px solid transparent;
     margin-bottom: 5vh;
 }
@@ -358,8 +359,8 @@ footer {
 .trianguloInvertido {
 
     /* background: #fff; */
-    border-left: 49vw solid #114B83;
-    border-right: 49vw solid #114B83;
+    border-left: 45vw solid #114B83;
+    border-right: 45vw solid #114B83;
     border-top: 10vh solid transparent;
     /* border-bottom: 33vh solid transparent; */
     /* transform: rotate(90deg);*/
@@ -368,8 +369,8 @@ footer {
 .trianguloInvertido2 {
 
     background: #114B83;
-    border-left: 49vw solid #fff;
-    border-right: 49vw solid #fff;
+    border-left: 45vw solid #fff;
+    border-right: 45vw solid #fff;
     border-top: 44vh solid transparent;
     /* border-bottom: 33vh solid transparent; */
     /* transform: rotate(90deg);*/
@@ -416,8 +417,8 @@ footer {
 }
 
 .containerPDP {
-    width: 100%;
-    margin: 0 0 0 7vw;
+    width: 94%;
+    margin: 0 0 0 5vw;
     padding: 0;
 }
 
@@ -460,7 +461,7 @@ footer {
 }
 
 .imgPortafolio {
-    width: 76vw;
+    width: 96%;
     border-radius: 14px;
 }
 
