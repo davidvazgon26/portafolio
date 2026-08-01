@@ -1,0 +1,187 @@
+/* ============================================================
+   Notas — estilos propios de la bitácora.
+   Depende de las variables definidas en index.css.
+   ============================================================ */
+
+.section__inner--reading { max-width: 760px; margin: 0 auto; }
+
+.nav__list--simple { gap: 1.25rem; }
+
+/* ---------- Filtros ---------- */
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin-bottom: 2.75rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.filter {
+    font-family: inherit;
+    font-size: .85rem;
+    color: var(--text-soft);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: .38rem .9rem;
+    cursor: pointer;
+    transition: color .15s, border-color .15s, background .15s;
+}
+.filter:hover { border-color: var(--accent); color: var(--text); }
+
+.filter.is-active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ---------- Entradas ---------- */
+.notas { display: grid; gap: 3.5rem; }
+
+.nota {
+    padding-bottom: 3.5rem;
+    border-bottom: 1px solid var(--border);
+}
+.nota:last-child { border-bottom: none; padding-bottom: 0; }
+.nota[hidden] { display: none; }
+
+.nota__meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .8rem;
+    margin-bottom: .7rem;
+    font-size: .84rem;
+    color: var(--text-soft);
+}
+.nota__meta time { font-family: var(--mono); }
+
+.nota__tipo {
+    font-size: .74rem;
+    font-weight: 600;
+    letter-spacing: .03em;
+    padding: .18rem .6rem;
+    border-radius: 999px;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+}
+.nota__tipo--problema    { color: #c2410c; }
+.nota__tipo--decision    { color: #7c3aed; }
+.nota__tipo--aprendizaje { color: var(--accent); }
+.nota__tipo--referencia  { color: #0e7490; }
+
+@media (prefers-color-scheme: dark) {
+    .nota__tipo--problema    { color: #fb923c; }
+    .nota__tipo--decision    { color: #a78bfa; }
+    .nota__tipo--referencia  { color: #22d3ee; }
+}
+
+.nota__title {
+    font-size: clamp(1.3rem, 3.5vw, 1.65rem);
+    line-height: 1.25;
+    letter-spacing: -.02em;
+    margin-bottom: 1.15rem;
+}
+
+/* ---------- Cuerpo ---------- */
+.nota__body { font-size: 1.02rem; }
+
+.nota__body p {
+    color: var(--text-soft);
+    margin-bottom: 1.15rem;
+}
+.nota__body p strong { color: var(--text); font-weight: 600; }
+
+.nota__body h3 {
+    font-size: 1.08rem;
+    margin: 2rem 0 .85rem;
+    color: var(--text);
+}
+
+.nota__body ul,
+.nota__body ol {
+    margin: 0 0 1.15rem 1.3rem;
+    color: var(--text-soft);
+}
+.nota__body li { margin-bottom: .5rem; }
+
+.nota__body a { text-decoration: underline; text-underline-offset: 2px; }
+
+/* Código en línea */
+.nota__body code {
+    font-family: var(--mono);
+    font-size: .87em;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: .1em .38em;
+    color: var(--text);
+}
+
+/* Bloques de código — deben poder desplazarse sin arrastrar la página */
+.nota__body pre {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 1.1rem 1.25rem;
+    margin-bottom: 1.35rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.nota__body pre code {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: .86rem;
+    line-height: 1.6;
+    color: var(--text);
+    white-space: pre;
+}
+
+.nota__body blockquote {
+    border-left: 3px solid var(--border);
+    padding-left: 1.15rem;
+    margin: 0 0 1.15rem;
+    color: var(--text-soft);
+    font-style: italic;
+}
+
+/* Apunte al margen: el detalle que casi muerde */
+.nota__aside {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: .95rem 1.15rem;
+    font-size: .93rem;
+    margin-top: 1.5rem;
+}
+
+.notas__empty {
+    text-align: center;
+    color: var(--text-soft);
+    padding: 3.5rem 0;
+}
+
+/* Tablas dentro de una nota */
+.nota__body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.35rem;
+    font-size: .93rem;
+}
+.nota__body th,
+.nota__body td {
+    border: 1px solid var(--border);
+    padding: .55rem .75rem;
+    text-align: left;
+}
+.nota__body th { background: var(--bg-alt); font-weight: 600; }
+.nota__body td { color: var(--text-soft); }
+
+@media (max-width: 720px) {
+    .nota__body pre { padding: .9rem 1rem; }
+    .notas { gap: 2.5rem; }
+    .nota  { padding-bottom: 2.5rem; }
+}

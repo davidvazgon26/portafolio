@@ -1,45 +1,61 @@
+/* ============================================================
+   Portafolio — David Vázquez
+   ============================================================ */
 
+(function () {
+    "use strict";
 
-// hero-styles
-const likes = [
-    "aprender cosas nuevas",
-    "investigar y aplicar",
-    "crear soluciones",
-    "resolver problemas",
-    "apoyar a mis compañeros",
-    "compartir el conocimiento",
-  ];
-
-  let i = 0;
-  
-  const like = () => {
-    if (i === likes.length - 1) {
-      i = 0;
-    } else {
-      i++;
+    // Año del footer, para no volver a dejarlo desactualizado.
+    var year = document.getElementById("year");
+    if (year) {
+        year.textContent = new Date().getFullYear();
     }
-    document.getElementById("likes").innerHTML = "y me gusta " + likes[i];
-  };
-  like();
-  
-  setInterval(() => {
-    like();
-  }, 1500);
 
-  // End hero-styles
+    // Cerrar el menú móvil al elegir un destino.
+    var toggle = document.getElementById("nav-toggle");
+    var links = document.querySelectorAll('.nav__list a[href^="#"]');
 
-  const menu = () =>{
-    console.log("Click a menu desde js")
-  }
+    if (toggle) {
+        Array.prototype.forEach.call(links, function (link) {
+            link.addEventListener("click", function () {
+                toggle.checked = false;
+            });
+        });
 
+        // Cerrarlo también al hacer clic fuera.
+        document.addEventListener("click", function (e) {
+            if (!toggle.checked) return;
+            if (e.target.closest(".nav")) return;
+            toggle.checked = false;
+        });
 
-  // Para cerrar menu
+        // ...y con Escape.
+        document.addEventListener("keydown", function (e) {
+            if (e.key === "Escape" && toggle.checked) {
+                toggle.checked = false;
+            }
+        });
+    }
 
-  const menuLinks = document.querySelectorAll('.navBurger a[href^="#"]');
+    // Resaltar en el menú la sección visible.
+    var sections = document.querySelectorAll("main section[id]");
 
-  menuLinks.forEach(link => {
-    link.addEventListener("click", ()=> {
-      //console.log("hiciste click en el enlace");
-      document.getElementById("check").checked = true;
-    })
-  })
+    if ("IntersectionObserver" in window && sections.length) {
+        var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+
+                var id = entry.target.getAttribute("id");
+                Array.prototype.forEach.call(links, function (link) {
+                    var active = link.getAttribute("href") === "#" + id;
+                    link.style.color = active ? "var(--text)" : "";
+                    link.style.borderBottomColor = active ? "var(--accent)" : "";
+                });
+            });
+        }, { rootMargin: "-40% 0px -55% 0px" });
+
+        Array.prototype.forEach.call(sections, function (section) {
+            observer.observe(section);
+        });
+    }
+})();

@@ -1,22 +1,43 @@
-# Portafolio David Vázquez
+# Portafolio — David Vázquez
 
+Portafolio personal. HTML, CSS y JavaScript sin frameworks ni dependencias: no requiere
+instalación ni proceso de compilación.
 
-### Se utilizó :
+🔗 **[portafoliodavid-zeta.vercel.app](https://portafoliodavid-zeta.vercel.app)**
 
-* <span style="color:#3e76a8">**HTML**</span>
-* <span style="color:#3e76a8">**CSS**</span>
-* <span style="color:#3e76a8">**Javascrip**</span>
+## Ejecutar en local
 
+Basta con abrir `index.html` en el navegador. Para servirlo con un servidor local:
 
-No requiere instalacion de dependencias.
+```bash
+npx serve .
+# o la extensión Live Server de VS Code
+```
 
+## Estructura
 
-para ver el proyecto desplegado visita el siguiente enlace: [pendiente]()
+```
+├── index.html          Todo el contenido
+├── CSS/index.css       Estilos, con variables y tema claro/oscuro
+├── js/index.js         Menú móvil, sección activa y año del footer
+└── resources/          Foto, CV y favicon
+```
 
-Algunas de las herramientas que se utilizaron de apoyo son:
+## Decisiones técnicas
 
-* [Figma](https://www.figma.com/file/TJBbV1wezHAAt1inyz9vbc/Portfolio?node-id=16%3A2) para el maketado 
+- **Sin framework.** El sitio es esencialmente estático; uno añadiría build, dependencias y
+  mantenimiento sin aportar nada a cambio.
+- **Tema claro/oscuro automático** vía `prefers-color-scheme`, con variables CSS.
+- **Responsive con `clamp()` y grid**, sin unidades de viewport en la tipografía — así el texto
+  sigue siendo legible al hacer zoom.
+- **Accesibilidad:** enlace para saltar al contenido, HTML semántico, foco visible y respeto a
+  `prefers-reduced-motion`.
+- **Menú móvil en CSS puro** (patrón checkbox); el JS solo lo cierra al navegar.
 
-* [Formsubmit](https://formsubmit.co/) para el envio de mensajes por la parte de "Contacto" 📩
+## Herramientas de apoyo
 
-* [Particles](https://vincentgarreau.com/particles.js/) para la parte de las animaciones
+- [Formsubmit](https://formsubmit.co/) — envío del formulario de contacto sin backend propio.
+
+## Despliegue
+
+Automático en Vercel con cada push a la rama principal.

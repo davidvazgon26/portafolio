@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notas — David Vázquez</title>
+    <meta name="description"
+        content="Bitácora técnica: problemas resueltos, decisiones y notas de aprendizaje. Documentación personal, pública por si le sirve a alguien más.">
+    <link rel="shortcut icon" href="../resources/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../CSS/index.css">
+    <link rel="stylesheet" href="../CSS/notas.css">
+</head>
+
+<body>
+    <a href="#main" class="skip-link">Saltar al contenido</a>
+
+    <header class="site-header">
+        <nav class="nav" aria-label="Navegación principal">
+            <a href="../index.html" class="nav__brand">DV</a>
+            <ul class="nav__list nav__list--simple">
+                <li><a href="../index.html">← Portafolio</a></li>
+                <li><a href="./index.html" aria-current="page">Notas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main">
+        <section class="section">
+            <div class="section__inner section__inner--reading">
+
+                <h1 class="section__title">Notas</h1>
+                <p class="section__lead">
+                    Bitácora técnica. Escribo aquí sobre todo para mí: para no volver a resolver dos veces
+                    el mismo problema y para acordarme de por qué decidí lo que decidí. Si a alguien más le
+                    sirve, mejor.
+                </p>
+
+                <!-- Filtros -->
+                <div class="filters" role="group" aria-label="Filtrar por tipo">
+                    <button class="filter is-active" data-filter="todas">Todas</button>
+                    <button class="filter" data-filter="problema">🔧 Problemas resueltos</button>
+                    <button class="filter" data-filter="decision">🧭 Decisiones</button>
+                    <button class="filter" data-filter="aprendizaje">📚 Aprendizaje</button>
+                    <button class="filter" data-filter="referencia">⚡ Referencia</button>
+                </div>
+
+                <!-- ==========================================================
+                     ENTRADAS
+                     Para publicar una nota nueva: copiar un <article> completo,
+                     pegarlo ARRIBA de los demás y editarlo. Nada más.
+                     Tipos válidos en data-tipo:
+                       problema · decision · aprendizaje · referencia
+                     ========================================================== -->
+                <div class="notas" id="notas">
+
+                    <article class="nota" data-tipo="aprendizaje">
+                        <div class="nota__meta">
+                            <time datetime="2026-07-31">31 jul 2026</time>
+                            <span class="nota__tipo nota__tipo--aprendizaje">📚 Aprendizaje</span>
+                        </div>
+                        <h2 class="nota__title">Cuando LINQ esconde un bucle</h2>
+                        <div class="nota__body">
+                            <p>
+                                Un reporte que tardaba minutos en generarse. Sin errores, sin excepciones:
+                                solo lento. Nadie había tocado el código — lo único que cambió fue la
+                                cantidad de datos.
+                            </p>
+                            <p>El patrón era este:</p>
+                            <pre><code>foreach (var pedido in pedidos)
+    foreach (var detalle in pedido.Detalles)
+        var producto = productos.FirstOrDefault(p =&gt; p.Id == detalle.IdProducto);</code></pre>
+                            <p>
+                                Mi primer instinto fue culpar a los <code>foreach</code> anidados. Me
+                                equivoqué: esos recorren datos que de verdad hay que recorrer. El problema
+                                estaba en la tercera línea, que no <em>parece</em> un bucle pero lo es —
+                                <code>FirstOrDefault</code> recorre la lista completa cada vez que se
+                                ejecuta.
+                            </p>
+                            <p>
+                                Con 8.000 pedidos, ~5 detalles cada uno y 3.000 productos, eso son
+                                <strong>120 millones de comparaciones</strong>. Y la aritmética explica por
+                                qué nadie lo notó antes: con 100 pedidos y 50 productos eran 25.000
+                                operaciones, un parpadeo. El error siempre estuvo ahí; solo hacía falta que
+                                los datos crecieran.
+                            </p>
+                            <p>El arreglo no fue quitar bucles, sino hacer barata la búsqueda:</p>
+                            <pre><code>// Se paga una sola vez, antes de entrar al bucle.
+var productosPorId = productos.ToDictionary(p =&gt; p.Id);
+
+foreach (var pedido in pedidos)
+    foreach (var detalle in pedido.Detalles)
+    {
+        Producto producto;
+        if (productosPorId.TryGetValue(detalle.IdProducto, out producto))
+            // ...
+    }</code></pre>
+                            <p>
+                                Los dos <code>foreach</code> siguen ahí. Lo que desapareció es el recorrido
+                                oculto: unas 43.000 operaciones en lugar de 120 millones.
+                            </p>
+                            <p>
+                                <strong>Lo que me llevo:</strong> buscar «ciclos anidados» leyendo el código
+                                no basta, porque LINQ los disfraza. <code>FirstOrDefault</code>,
+                                <code>Where</code>, <code>Any</code> y <code>Contains</code> sobre una lista
+                                son recorridos completos con sintaxis de operación simple. Y cuando la
+                                búsqueda es siempre por la misma clave, un <code>Dictionary</code> convierte
+                                ese recorrido en un acceso directo.
+                            </p>
+                            <p class="nota__aside">
+                                Detalle que casi me muerde: <code>ToDictionary</code> lanza excepción si hay
+                                claves repetidas. Con una clave primaria no pasa; con cualquier otro campo,
+                                conviene <code>ToLookup</code>.
+                            </p>
+                        </div>
+                    </article>
+
+                </div>
+
+                <p class="notas__empty" id="sin-resultados" hidden>
+                    No hay notas de este tipo todavía.
+                </p>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="site-footer__inner">
+            <p>© <span id="year">2026</span> David Vázquez</p>
+            <p class="site-footer__note"><a href="../index.html">Volver al portafolio</a></p>
+        </div>
+    </footer>
+
+    <script src="../js/notas.js"></script>
+</body>
+
+</html>
