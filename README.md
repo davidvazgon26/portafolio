@@ -17,17 +17,34 @@ npx serve .
 ## Estructura
 
 ```
-├── index.html          Todo el contenido
-├── CSS/index.css       Estilos, con variables y tema claro/oscuro
-├── js/index.js         Menú móvil, sección activa y año del footer
-└── resources/          Foto, CV y favicon
+├── index.html              Portada
+├── CSS/
+│   ├── index.css           Base: variables, tema, layout y componentes
+│   ├── notas.css           Solo lo propio de la bitácora
+│   └── herramientas.css    Solo lo propio del índice de herramientas
+├── js/
+│   ├── comun.js            Año, menú móvil, tema y filtro genérico
+│   ├── index.js            Resaltado de la sección visible
+│   ├── notas.js            Configura el filtro de notas
+│   └── herramientas.js     Configura el filtro de herramientas
+├── notas/                  Bitácora técnica
+├── herramientas/           Índice + las que corren en el navegador
+└── resources/              Foto, CV y favicon
 ```
+
+`comun.js` se carga **antes** que el JS específico de cada página; es el único orden que importa.
 
 ## Decisiones técnicas
 
 - **Sin framework.** El sitio es esencialmente estático; uno añadiría build, dependencias y
   mantenimiento sin aportar nada a cambio.
-- **Tema claro/oscuro automático** vía `prefers-color-scheme`, con variables CSS.
+- **Tema claro/oscuro** con variables CSS: sigue al sistema por `prefers-color-scheme` y se puede
+  forzar con el botón del menú, que guarda la elección en `localStorage`. Un script mínimo en el
+  `<head>` aplica el tema antes de pintar, para que no haya destello blanco al recargar en oscuro.
+- **Herramientas: dentro o fuera según lo que necesiten.** Si corre en el navegador vive en este
+  repo y se puede usar desde el sitio; si necesita backend o build, vive en su repositorio y aquí
+  queda una ficha que enlaza a la demo y al código. El índice es uno solo. Detalle en
+  [`herramientas/COMO-PUBLICAR.md`](herramientas/COMO-PUBLICAR.md).
 - **Responsive con `clamp()` y grid**, sin unidades de viewport en la tipografía — así el texto
   sigue siendo legible al hacer zoom.
 - **Accesibilidad:** enlace para saltar al contenido, HTML semántico, foco visible y respeto a
