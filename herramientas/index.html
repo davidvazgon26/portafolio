@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herramientas — David Vázquez</title>
+    <meta name="description"
+        content="Utilidades pequeñas que construí porque las necesitaba. Varias corren en el navegador, sin enviar nada a ningún servidor.">
+    <link rel="shortcut icon" href="../resources/images/favicon.ico" type="image/x-icon">
+
+    <!-- Aplica el tema guardado ANTES de pintar, para evitar el destello
+         blanco. Debe ir antes del CSS. -->
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem("tema");
+                if (t) document.documentElement.setAttribute("data-theme", t);
+            } catch (e) { }
+        })();
+    </script>
+
+    <link rel="stylesheet" href="../CSS/index.css">
+    <link rel="stylesheet" href="../CSS/herramientas.css">
+</head>
+
+<body>
+    <a href="#main" class="skip-link">Saltar al contenido</a>
+
+    <header class="site-header">
+        <!-- Cabecera de subpágina. Estructura idéntica en notas/ y herramientas/:
+             si se cambia una, cambiar la otra. El checkbox y el burger son
+             imprescindibles: sin ellos el menú queda inalcanzable por debajo
+             de 720px, porque .nav__list pasa a display:none. -->
+        <nav class="nav" aria-label="Navegación principal">
+            <a href="../index.html" class="nav__brand">DV</a>
+
+            <input type="checkbox" id="nav-toggle" class="nav__checkbox">
+            <label for="nav-toggle" class="nav__burger" aria-label="Abrir menú">
+                <span></span><span></span><span></span>
+            </label>
+
+            <ul class="nav__list nav__list--simple">
+                <li><a href="../index.html">← Portafolio</a></li>
+                <li><a href="../notas/index.html">Notas</a></li>
+                <li><a href="./index.html" aria-current="page">Herramientas</a></li>
+            </ul>
+
+            <button class="nav__tema" type="button" aria-label="Cambiar tema">
+                <svg class="nav__tema-luna" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                </svg>
+                <svg class="nav__tema-sol" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="4" />
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <main id="main">
+        <section class="section">
+            <div class="section__inner">
+
+                <h1 class="section__title">Herramientas</h1>
+                <p class="section__lead">
+                    Utilidades pequeñas que construí porque las necesitaba. Las que están marcadas
+                    como <strong>Aquí mismo</strong> corren en tu navegador: no envían nada a
+                    ningún servidor. Las demás viven en su propio repositorio.
+                </p>
+
+                <div class="filters" role="group" aria-label="Filtrar por categoría">
+                    <button class="filter is-active" data-filter="todas">Todas</button>
+                    <button class="filter" data-filter="datos">Datos</button>
+                    <button class="filter" data-filter="texto">Texto</button>
+                    <button class="filter" data-filter="desarrollo">Desarrollo</button>
+                    <button class="filter" data-filter="calculo">Cálculo</button>
+                </div>
+
+                <!-- ==========================================================
+                     FICHAS
+                     Guía completa en COMO-PUBLICAR.md (junto a este archivo).
+                     Para añadir una: copiar un <article>, pegarlo arriba y
+                     editarlo.
+
+                     Categorías válidas en data-categoria (provisionales):
+                       datos · texto · desarrollo · calculo
+                     ========================================================== -->
+                <div class="cards" id="herramientas">
+
+                    <!-- PLANTILLA A — herramienta alojada aquí.
+                         Dejar comentada hasta que exista la primera real.
+                    <article class="card herramienta" data-categoria="texto">
+                        <div class="card__tag">Aquí mismo</div>
+                        <h2 class="card__title">Nombre de la herramienta</h2>
+                        <p class="card__desc">
+                            Qué problema resuelve, en una o dos frases.
+                        </p>
+                        <ul class="card__stack">
+                            <li>JavaScript</li>
+                            <li>Sin dependencias</li>
+                        </ul>
+                        <div class="card__links">
+                            <a href="./slug/index.html">Abrir &rarr;</a>
+                        </div>
+                    </article>
+                    -->
+
+                    <!-- PLANTILLA B — herramienta en repositorio aparte.
+                    <article class="card herramienta" data-categoria="desarrollo">
+                        <div class="card__tag card__tag--alt">Repo aparte</div>
+                        <h2 class="card__title">Nombre de la herramienta</h2>
+                        <p class="card__desc">
+                            Qué problema resuelve, en una o dos frases.
+                        </p>
+                        <ul class="card__stack">
+                            <li>C#</li>
+                            <li>.NET</li>
+                        </ul>
+                        <div class="card__links">
+                            <a href="https://…" target="_blank" rel="noopener">Ver demo &rarr;</a>
+                            <a href="https://github.com/…" target="_blank" rel="noopener">Código &rarr;</a>
+                        </div>
+                    </article>
+                    -->
+
+                </div>
+
+                <p class="herramientas__empty" id="sin-resultados" hidden>
+                    Todavía no hay herramientas publicadas aquí.
+                </p>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="site-footer__inner">
+            <p>© <span id="year">2026</span> David Vázquez</p>
+            <p class="site-footer__note"><a href="../index.html">Volver al portafolio</a></p>
+        </div>
+    </footer>
+
+    <script src="../js/comun.js"></script>
+    <script src="../js/herramientas.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+/* ============================================================
+   Herramientas — estilos propios del índice.
+
+   Depende de index.css: las variables, .cards/.card* y .filters/.filter
+   vienen de ahí. Aquí solo lo que no existe en ningún otro sitio.
+   ============================================================ */
+
+/* Imprescindible: .card declara display:flex, que gana al display:none
+   implícito del atributo [hidden]. Sin esta regla el filtro no oculta nada. */
+.herramienta[hidden] { display: none; }
+
+.herramientas__empty {
+    text-align: center;
+    color: var(--text-soft);
+    padding: 3.5rem 0;
+}
