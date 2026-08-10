@@ -22,6 +22,7 @@
     --mono: ui-monospace, SFMono-Regular, "Cascadia Code", Consolas, monospace;
 }
 
+/* Tema oscuro por preferencia del sistema (sin elección manual guardada). */
 @media (prefers-color-scheme: dark) {
     :root {
         --bg:          #0f1319;
@@ -34,6 +35,33 @@
         --border:      #262e38;
         --shadow:      0 1px 3px rgba(0, 0, 0, .3), 0 6px 20px rgba(0, 0, 0, .2);
     }
+}
+
+/* Elección manual. Va DESPUÉS del media query para poder ganarle en ambos
+   sentidos: [data-theme="light"] tiene que forzar el claro aunque el sistema
+   esté en oscuro. Lo escribe js/comun.js en <html>. */
+:root[data-theme="dark"] {
+    --bg:          #0f1319;
+    --bg-alt:      #151b23;
+    --bg-card:     #181f28;
+    --text:        #e6eaf0;
+    --text-soft:   #9aa6b5;
+    --accent:      #58a6ff;
+    --accent-soft: #14273d;
+    --border:      #262e38;
+    --shadow:      0 1px 3px rgba(0, 0, 0, .3), 0 6px 20px rgba(0, 0, 0, .2);
+}
+
+:root[data-theme="light"] {
+    --bg:          #ffffff;
+    --bg-alt:      #f6f8fa;
+    --bg-card:     #ffffff;
+    --text:        #1a1f26;
+    --text-soft:   #5a6472;
+    --accent:      #0b6bcb;
+    --accent-soft: #e7f0fb;
+    --border:      #e2e6eb;
+    --shadow:      0 1px 3px rgba(0, 0, 0, .06), 0 6px 20px rgba(0, 0, 0, .04);
 }
 
 /* ---------- Reset ---------- */
@@ -127,7 +155,53 @@ a:hover { text-decoration: underline; }
     text-decoration: none;
 }
 
+/* Sección visible según el scroll. Debe ir DESPUÉS de :hover: empatan en
+   especificidad y aplican los mismos valores, así que gana el último. */
+.nav__list a.is-active {
+    color: var(--text);
+    border-bottom-color: var(--accent);
+}
+
+/* Nav de subpágina: menos ítems, menos separación. */
+.nav__list--simple { gap: 1.25rem; }
+
 .nav__checkbox { display: none; }
+
+/* ---------- Botón de tema ---------- */
+.nav__tema {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    margin-left: 1.25rem;
+    color: var(--text-soft);
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: color .15s, border-color .15s;
+}
+.nav__tema:hover { color: var(--text); border-color: var(--accent); }
+
+.nav__tema svg { width: 17px; height: 17px; display: block; }
+
+/* Se muestra el icono de lo que se va a activar, no el del tema actual:
+   en claro se ve la luna (pulsa para oscuro) y viceversa. */
+.nav__tema .nav__tema-luna { display: block; }
+.nav__tema .nav__tema-sol  { display: none; }
+
+@media (prefers-color-scheme: dark) {
+    .nav__tema .nav__tema-luna { display: none; }
+    .nav__tema .nav__tema-sol  { display: block; }
+}
+
+/* La elección manual manda sobre el sistema, igual que con las variables. */
+:root[data-theme="dark"] .nav__tema .nav__tema-luna { display: none; }
+:root[data-theme="dark"] .nav__tema .nav__tema-sol  { display: block; }
+:root[data-theme="light"] .nav__tema .nav__tema-luna { display: block; }
+:root[data-theme="light"] .nav__tema .nav__tema-sol  { display: none; }
 
 .nav__burger {
     display: none;
@@ -359,6 +433,36 @@ a:hover { text-decoration: underline; }
     background: var(--accent);
 }
 .tl-item__points strong { color: var(--text); font-weight: 600; }
+
+/* ---------- Filtros ---------- */
+/* Píldoras de filtrado. Genéricas: las usan la bitácora y las herramientas. */
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin-bottom: 2.75rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.filter {
+    font-family: inherit;
+    font-size: .85rem;
+    color: var(--text-soft);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: .38rem .9rem;
+    cursor: pointer;
+    transition: color .15s, border-color .15s, background .15s;
+}
+.filter:hover { border-color: var(--accent); color: var(--text); }
+
+.filter.is-active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
 
 /* ---------- Cards ---------- */
 .cards {

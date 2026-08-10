@@ -1,40 +1,12 @@
 /* ============================================================
    Notas — estilos propios de la bitácora.
    Depende de las variables definidas en index.css.
+
+   Lo genérico (.nav__list--simple, .filters, .filter) vive en index.css
+   porque lo comparten varias páginas. Aquí solo queda lo que es de notas.
    ============================================================ */
 
 .section__inner--reading { max-width: 760px; margin: 0 auto; }
-
-.nav__list--simple { gap: 1.25rem; }
-
-/* ---------- Filtros ---------- */
-.filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .5rem;
-    margin-bottom: 2.75rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid var(--border);
-}
-
-.filter {
-    font-family: inherit;
-    font-size: .85rem;
-    color: var(--text-soft);
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    padding: .38rem .9rem;
-    cursor: pointer;
-    transition: color .15s, border-color .15s, background .15s;
-}
-.filter:hover { border-color: var(--accent); color: var(--text); }
-
-.filter.is-active {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #fff;
-}
 
 /* ---------- Entradas ---------- */
 .notas { display: grid; gap: 3.5rem; }

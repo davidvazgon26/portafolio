@@ -8,6 +8,18 @@
     <meta name="description"
         content="Bitácora técnica: problemas resueltos, decisiones y notas de aprendizaje. Documentación personal, pública por si le sirve a alguien más.">
     <link rel="shortcut icon" href="../resources/images/favicon.ico" type="image/x-icon">
+
+    <!-- Aplica el tema guardado ANTES de pintar, para evitar el destello
+         blanco. Debe ir antes del CSS. -->
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem("tema");
+                if (t) document.documentElement.setAttribute("data-theme", t);
+            } catch (e) { }
+        })();
+    </script>
+
     <link rel="stylesheet" href="../CSS/index.css">
     <link rel="stylesheet" href="../CSS/notas.css">
 </head>
@@ -16,12 +28,37 @@
     <a href="#main" class="skip-link">Saltar al contenido</a>
 
     <header class="site-header">
+        <!-- Cabecera de subpágina. Estructura idéntica en notas/ y herramientas/:
+             si se cambia una, cambiar la otra. El checkbox y el burger son
+             imprescindibles: sin ellos el menú queda inalcanzable por debajo
+             de 720px, porque .nav__list pasa a display:none. -->
         <nav class="nav" aria-label="Navegación principal">
             <a href="../index.html" class="nav__brand">DV</a>
+
+            <input type="checkbox" id="nav-toggle" class="nav__checkbox">
+            <label for="nav-toggle" class="nav__burger" aria-label="Abrir menú">
+                <span></span><span></span><span></span>
+            </label>
+
             <ul class="nav__list nav__list--simple">
                 <li><a href="../index.html">← Portafolio</a></li>
                 <li><a href="./index.html" aria-current="page">Notas</a></li>
+                <!-- TODO: descomentar cuando exista la primera herramienta real.
+                <li><a href="../herramientas/index.html">Herramientas</a></li>
+                -->
             </ul>
+
+            <button class="nav__tema" type="button" aria-label="Cambiar tema">
+                <svg class="nav__tema-luna" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                </svg>
+                <svg class="nav__tema-sol" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="4" />
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+                </svg>
+            </button>
         </nav>
     </header>
 
@@ -132,6 +169,7 @@ foreach (var pedido in pedidos)
         </div>
     </footer>
 
+    <script src="../js/comun.js"></script>
     <script src="../js/notas.js"></script>
 </body>
 
