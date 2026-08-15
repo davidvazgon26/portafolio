@@ -47,10 +47,7 @@
                 <li><a href="#proyectos">Proyectos</a></li>
                 <li><a href="#habilidades">Habilidades</a></li>
                 <li><a href="./notas/index.html">Notas</a></li>
-                <!-- TODO: descomentar cuando exista la primera herramienta real.
-                     Checklist completo en herramientas/COMO-PUBLICAR.md
                 <li><a href="./herramientas/index.html">Herramientas</a></li>
-                -->
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
 
@@ -273,6 +270,37 @@
 
                 <div class="cards">
 
+                    <!-- El cliente aún no autoriza que se use su marca, así que la ficha
+                         describe el trabajo sin nombrarlo. Cuando apruebe: cambiar el
+                         título por el del despacho y agregar el enlace al repo. -->
+                    <article class="card card--featured">
+                        <div class="card__tag">Trabajo freelance</div>
+                        <h3 class="card__title">Sitio para un despacho de arquitectura</h3>
+                        <p class="card__desc">
+                            Landing de un despacho que diseña, construye y equipa. Sitio estático con cero
+                            dependencias de producción: JavaScript propio de 13 KB, tipografías auto-hospedadas
+                            y una política de seguridad de contenido estricta, sin <code>unsafe-inline</code>.
+                            El contenido vive en el HTML y no se pinta con JavaScript, porque el enlace circula
+                            por mensajería y esos rastreadores no ejecutan scripts.
+                        </p>
+                        <p class="card__desc">
+                            Incluye un administrador donde el cliente prepara proyectos nuevos: procesa las
+                            fotos en su propio navegador y les quita los metadatos de ubicación antes de que
+                            salgan del equipo.
+                        </p>
+                        <ul class="card__stack">
+                            <li>Vite</li>
+                            <li>JavaScript</li>
+                            <li>CSS</li>
+                            <li>Accesibilidad</li>
+                            <li>Vercel</li>
+                        </ul>
+                        <div class="card__links">
+                            <a href="https://dual-arquitectos.vercel.app/" target="_blank"
+                                rel="noopener">Ver demo →</a>
+                        </div>
+                    </article>
+
                     <article class="card card--featured">
                         <div class="card__tag">Trabajo real</div>
                         <h3 class="card__title">Captura y validación de huella digital</h3>
@@ -366,11 +394,6 @@
         </section>
 
         <!-- ======================= HERRAMIENTAS ======================= -->
-        <!-- TODO: descomentar cuando exista la primera herramienta real.
-             Una sección vacía se ve peor que no tenerla. Al activarla hay que
-             ajustar también el ritmo de fondos: habilidades pierde
-             .section--alt, notas lo gana y contacto lo pierde.
-             Checklist completo en herramientas/COMO-PUBLICAR.md
         <section id="herramientas" class="section section--alt">
             <div class="section__inner section__inner--narrow">
                 <h2 class="section__title">Herramientas</h2>
@@ -382,10 +405,9 @@
                 <a class="btn btn--primary" href="./herramientas/index.html">Ver las herramientas &rarr;</a>
             </div>
         </section>
-        -->
 
         <!-- ======================= HABILIDADES ======================= -->
-        <section id="habilidades" class="section section--alt">
+        <section id="habilidades" class="section">
             <div class="section__inner">
                 <h2 class="section__title">Habilidades</h2>
                 <p class="section__lead">
@@ -455,7 +477,7 @@
         </section>
 
         <!-- ======================= NOTAS ======================= -->
-        <section id="notas" class="section">
+        <section id="notas" class="section section--alt">
             <div class="section__inner section__inner--narrow">
                 <h2 class="section__title">Notas</h2>
                 <p class="section__lead">
@@ -468,7 +490,7 @@
         </section>
 
         <!-- ======================= CONTACTO ======================= -->
-        <section id="contacto" class="section section--alt">
+        <section id="contacto" class="section">
             <div class="section__inner section__inner--narrow">
                 <h2 class="section__title">Contacto</h2>
                 <p class="section__lead">
