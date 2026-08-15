@@ -5,21 +5,22 @@
 >
 > Para aplicarlo: entrar a ese repo → editar `README.md` → pegar lo que sigue.
 
-## 🔴 NO PUBLICAR TODAVÍA — está listo, pero bloqueado
+## 🔴 NO PUBLICAR TODAVÍA — está listo y aprobado, pero en pausa
 
-**Este contenido está terminado y aprobado; lo que falta no es el texto.**
+**El texto está terminado y a dvazquez le parece bien. El bloqueo no es de contenido ni
+de código.**
 
-El 15-ago-2026 se publicó por error y se revirtió el mismo día (commits `57b425b` y
-`d70c021` del repo del perfil). El perfil sigue mostrando el README de 2022.
+El 15-ago-2026 se publicó y se revirtió el mismo día (commits `57b425b` y `d70c021` del
+repo del perfil). El perfil sigue mostrando el README de 2022.
 
-**El motivo del bloqueo:** este README enlaza al portafolio, y el sitio en
-`portafoliodavid-zeta.vercel.app` **sigue sirviendo la versión anterior al rediseño de
-julio** — carga `particles.min.js`, que el rediseño eliminó. El repositorio en GitHub sí
-está al día; lo que falla es la conexión de Vercel (ver diagnóstico abajo).
+**El motivo es personal y ajeno al proyecto.** Dvazquez tiene una razón para no tocar
+todavía su portada de GitHub que no tiene que ver con el desarrollo y que no se documentó
+aquí. **No hace falta conocerla para respetarla: hasta que él diga que sí, esto no se
+publica**, aunque todo lo demás esté resuelto.
 
-Publicar este README antes de arreglar eso manda a los reclutadores a un portafolio de
-2022 con proyectos de bootcamp, que es exactamente lo que el texto nuevo dice que ya no
-haces. **Primero el portafolio en línea, después el perfil.**
+⚠️ **No confundir con el problema de Vercel** que está más abajo. Son dos asuntos
+independientes: aquel es un bug real que conviene arreglar por su cuenta, pero **arreglarlo
+NO desbloquea esta publicación**. La única condición aquí es que dvazquez lo autorice.
 
 ### Cómo publicarlo cuando toque
 
@@ -33,7 +34,13 @@ start vista-previa-perfil.html
 Y después, a mano en `github.com/davidvazgon26/davidvazgon26` → editar `README.md` → pegar
 el bloque de abajo. **Que lo haga dvazquez, no Claude.**
 
-### ⚠️ El despliegue del portafolio está roto — arreglar primero
+---
+
+## ⚠️ Aparte: el despliegue del portafolio está roto
+
+**Problema independiente del bloqueo de arriba.** Vale la pena arreglarlo por sí mismo —el
+portafolio está enlazado desde LinkedIn y desde el README actual—, pero resolverlo no
+habilita la publicación del perfil.
 
 Diagnóstico del 15-ago-2026:
 
