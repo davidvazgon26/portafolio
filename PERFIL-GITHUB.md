@@ -18,6 +18,12 @@ Mi trabajo no es empezar proyectos desde cero: es entrar a sistemas que llevan a
 décadas— en producción, entender por qué están hechos como están, y cambiarlos sin romper lo
 que la operación necesita todos los días.
 
+También tomo proyectos completos por mi cuenta: de la primera conversación al sitio
+desplegado — diseño, frontend, backend, despliegue y la documentación para que otro pueda
+mantenerlo. Uso herramientas de IA en ese proceso y me permiten cubrir todo ese rango solo.
+Lo que no delego es el criterio: qué se construye, qué se deja fuera y qué se le promete a
+quien lo va a usar.
+
 - 🔧 Trabajo a diario con **C#, .NET, ASP.NET Web API, SQL Server y Angular**
 - 🏗️ Me especializo en **mantener y modernizar sistemas heredados**
 - 📊 Llegué al desarrollo desde el análisis de datos, y eso me marcó: antes de proponer una
@@ -56,6 +62,21 @@ que la operación necesita todos los días.
 | "Currently working on My Ticket" | Trabajo actual real | "My Ticket" es de 2022; presentarlo como actual desactualiza el perfil. |
 | Proyectos destacados: Pokémon, comida | Enlaces a LinkedIn y portafolio | Los proyectos de práctica van en el portafolio, no en la portada. |
 | Soft skills genéricas | Cómo trabajas, concreto | "Trabajo en equipo, creatividad y compromiso" lo escribe todo el mundo. |
+| — | Párrafo de proyectos por cuenta propia | Abre la puerta a trabajo independiente y dice que puedes entregar solo un proyecto entero. |
+
+### Sobre mencionar la IA
+
+Se decidió **poner el alcance primero y la IA como método**, no al revés. El motivo: anunciar
+"trabajo con IA" en primer plano corta para los dos lados — a un cliente le suena a eficiencia,
+pero a cierto reclutador técnico le suena a dependencia. Lo que no tiene ese riesgo es el
+alcance: que tomas un proyecto entero tú solo.
+
+La frase de cierre ("lo que no delego es el criterio") es la que hace el trabajo: separa a
+quien dirige el desarrollo de quien solo lo despacha. Si algún día suena a demasiado, es la
+última que se quita, no la primera.
+
+**Se decidió NO incluir enlace a un proyecto como evidencia** — el portafolio ya está enlazado
+arriba y ahí está el trabajo.
 
 ---
 
