@@ -5,6 +5,59 @@
 >
 > Para aplicarlo: entrar a ese repo → editar `README.md` → pegar lo que sigue.
 
+## 🔴 NO PUBLICAR TODAVÍA — está listo, pero bloqueado
+
+**Este contenido está terminado y aprobado; lo que falta no es el texto.**
+
+El 15-ago-2026 se publicó por error y se revirtió el mismo día (commits `57b425b` y
+`d70c021` del repo del perfil). El perfil sigue mostrando el README de 2022.
+
+**El motivo del bloqueo:** este README enlaza al portafolio, y el sitio en
+`portafoliodavid-zeta.vercel.app` **sigue sirviendo la versión anterior al rediseño de
+julio** — carga `particles.min.js`, que el rediseño eliminó. El repositorio en GitHub sí
+está al día; lo que falla es la conexión de Vercel (ver diagnóstico abajo).
+
+Publicar este README antes de arreglar eso manda a los reclutadores a un portafolio de
+2022 con proyectos de bootcamp, que es exactamente lo que el texto nuevo dice que ya no
+haces. **Primero el portafolio en línea, después el perfil.**
+
+### Cómo publicarlo cuando toque
+
+Desde `Personal/Portafolio/`, con `gh` autenticado:
+
+```powershell
+node previsualizar-perfil.mjs      # revisar antes
+start vista-previa-perfil.html
+```
+
+Y después, a mano en `github.com/davidvazgon26/davidvazgon26` → editar `README.md` → pegar
+el bloque de abajo. **Que lo haga dvazquez, no Claude.**
+
+### ⚠️ El despliegue del portafolio está roto — arreglar primero
+
+Diagnóstico del 15-ago-2026:
+
+| | |
+|---|---|
+| GitHub | ✅ Correcto. Rama `main`, `main` es la rama por defecto, todos los commits subidos |
+| Sitio en vivo | ❌ Versión anterior a julio: carga `particles.min.js` y usa el título viejo |
+| Peso servido | 13 KB contra 29.5 KB del `index.html` local |
+
+**Hipótesis principal:** en Vercel, la *Production Branch* del proyecto dice `master` y el
+repo solo tiene `main`, así que ningún push dispara despliegue y el sitio quedó congelado
+en el último que sí vino de `master`. Encaja con que los 4 commits de julio nunca se
+vieran publicados.
+
+**Qué revisar** en vercel.com → proyecto del portafolio → Settings → Git:
+1. ¿A qué repositorio está conectado? Debe ser `davidvazgon26/portafolio`.
+2. **Production Branch** → si dice `master`, cambiar a `main`.
+3. Deployments → si el último es de julio o antes, confirma que no se dispara nada.
+4. Forzar un **Redeploy** con la rama ya corregida.
+
+Si nunca estuvo conectado, reimportar el repo y borrar el proyecto viejo — **conservando
+el dominio `portafoliodavid-zeta.vercel.app`**, que es el que está enlazado desde todos
+lados.
+
 ---
 
 ## Contenido propuesto
