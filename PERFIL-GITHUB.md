@@ -42,28 +42,45 @@ el bloque de abajo. **Que lo haga dvazquez, no Claude.**
 portafolio está enlazado desde LinkedIn y desde el README actual—, pero resolverlo no
 habilita la publicación del perfil.
 
-Diagnóstico del 15-ago-2026:
+## ⚠️ El despliegue del portafolio estuvo roto — causa encontrada
 
-| | |
+**Causa real (15-ago-2026):** el proyecto de Vercel tenía fijado **Node.js 16.x**, versión
+que Vercel descontinuó. El build abortaba antes de empezar:
+
+```
+Found invalid or discontinued Node.js Version: "16.x".
+Please set Node.js Version to 24.x in your Project Settings.
+```
+
+**Arreglo:** Vercel → proyecto `portafoliodavid-clmu` → Settings → *Build and Deployment*
+→ **Node.js Version** → cambiar 16.x por la versión vigente → Save → volver a desplegar.
+
+### Lo que hay que recordar de esto
+
+- El portafolio es **estático puro** y no ejecuta Node para nada, pero Vercel **valida la
+  versión antes de construir** aunque no la vaya a usar. Un ajuste heredado puede tumbar
+  un sitio que técnicamente no lo necesita.
+- **Falló solo y en silencio.** El último build bueno fue del 18-ago-2025; entre esa fecha
+  y hoy no hubo pushes, así que nadie se enteró. El sitio siguió sirviendo la versión
+  vieja con `HTTP 200`, sin ningún síntoma visible desde fuera.
+- Por eso el rediseño de julio nunca se vio publicado, aunque el código estuviera bien.
+- **Vale la pena revisar los otros proyectos de Vercel** por el mismo ajuste heredado
+  (`mi-solicitud` y `dual-arquitectos` se crearon hoy, así que esos vienen con versión
+  vigente).
+
+### Hipótesis descartadas, para no repetirlas
+
+| Se sospechó | Por qué no era |
 |---|---|
-| GitHub | ✅ Correcto. Rama `main`, `main` es la rama por defecto, todos los commits subidos |
-| Sitio en vivo | ❌ Versión anterior a julio: carga `particles.min.js` y usa el título viejo |
-| Peso servido | 13 KB contra 29.5 KB del `index.html` local |
+| *Production Branch* en `master` | El repo solo tiene `main`, es la rama por defecto, y los despliegues **sí se disparaban** |
+| Vercel desconectado del repo | Registra despliegues en GitHub desde 2022, incluido el de hoy |
+| Caché del CDN | Persistía esquivando la caché con query string |
+| Proyecto pausado | Un proyecto pausado responde `503 DEPLOYMENT_PAUSED`; este respondía `200` |
 
-**Hipótesis principal:** en Vercel, la *Production Branch* del proyecto dice `master` y el
-repo solo tiene `main`, así que ningún push dispara despliegue y el sitio quedó congelado
-en el último que sí vino de `master`. Encaja con que los 4 commits de julio nunca se
-vieran publicados.
-
-**Qué revisar** en vercel.com → proyecto del portafolio → Settings → Git:
-1. ¿A qué repositorio está conectado? Debe ser `davidvazgon26/portafolio`.
-2. **Production Branch** → si dice `master`, cambiar a `main`.
-3. Deployments → si el último es de julio o antes, confirma que no se dispara nada.
-4. Forzar un **Redeploy** con la rama ya corregida.
-
-Si nunca estuvo conectado, reimportar el repo y borrar el proyecto viejo — **conservando
-el dominio `portafoliodavid-zeta.vercel.app`**, que es el que está enlazado desde todos
-lados.
+**La lección de método:** el registro de despliegues de GitHub
+(`gh api repos/OWNER/REPO/deployments` y sus `statuses`) dice si Vercel se enteró del push
+y si el build pasó, **sin necesidad de entrar a Vercel**. Es el primer sitio donde mirar;
+haberlo consultado antes habría ahorrado tres hipótesis equivocadas.
 
 ---
 
