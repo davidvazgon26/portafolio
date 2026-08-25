@@ -91,6 +91,78 @@
 
                     <article class="nota" data-tipo="aprendizaje">
                         <div class="nota__meta">
+                            <time datetime="2026-08-25">25 ago 2026</time>
+                            <span class="nota__tipo nota__tipo--aprendizaje">📚 Aprendizaje</span>
+                        </div>
+                        <h2 class="nota__title">RLS filtra filas, no columnas</h2>
+                        <div class="nota__body">
+                            <p>
+                                En un CRM que estoy construyendo, cada asesor tiene que poder editar su
+                                propio expediente: teléfono, RFC, cédula, la cuenta donde cobra sus
+                                comisiones. La seguridad a nivel de fila de Postgres parecía la herramienta
+                                obvia: una política que diga «puedes actualizar tu propia fila» y listo.
+                            </p>
+                            <pre><code>create policy editar_lo_mio on perfiles
+  for update to authenticated
+  using (id = auth.uid())
+  with check (id = auth.uid());</code></pre>
+                            <p>
+                                El problema es que en esa misma tabla vive la columna <code>rol</code>. Y la
+                                política, leída con cuidado, dice algo distinto de lo que yo quería decir:
+                                <em>puedes escribir cualquier columna de tu fila</em>. Incluida la que decide
+                                si eres administrador.
+                            </p>
+                            <h3>El callejón sin salida</h3>
+                            <p>
+                                Mi primer reflejo fue afinar la política: comparar el rol nuevo contra el
+                                viejo y rechazar el cambio. No se puede. En un <code>UPDATE</code>, la
+                                cláusula <code>USING</code> ve la fila <em>antes</em> del cambio y
+                                <code>WITH CHECK</code> la ve <em>después</em>, pero ninguna de las dos ve
+                                las dos a la vez. «El rol no cambió» es una frase que una política no puede
+                                expresar.
+                            </p>
+                            <p>
+                                Ahí está el fondo del asunto: RLS decide <strong>qué filas</strong> toca cada
+                                quien, no <strong>qué columnas</strong>. Le estaba pidiendo que respondiera
+                                una pregunta que no sabe responder.
+                            </p>
+                            <h3>Lo que sí funciona</h3>
+                            <p>
+                                Quitarle al asesor la política de <code>update</code> y darle en su lugar una
+                                función <code>security definer</code> que escriba exactamente las columnas
+                                permitidas y ninguna más. La única puerta pasa a ser la firma de la función,
+                                y ahí <code>rol</code> no aparece.
+                            </p>
+                            <pre><code>create function actualizar_mi_expediente(
+  p_telefono text, p_rfc text, p_clabe text
+) returns void
+language plpgsql security definer set search_path = '' as $$
+begin
+  update perfiles set
+    telefono = p_telefono,
+    rfc      = p_rfc,
+    clabe    = p_clabe
+  where id = (select auth.uid());
+end;
+$$;</code></pre>
+                            <p class="nota__aside">
+                                El detalle que casi se me pasa: cuando probé el ataque,
+                                <strong>no falló</strong>. Un <code>update</code> que la política deja fuera
+                                no lanza error: no encuentra filas y devuelve éxito con cero renglones
+                                afectados. Si hubiera esperado una excepción para darme por protegido,
+                                habría concluido justo lo contrario.
+                            </p>
+                            <p>
+                                <strong>Lo que me llevo:</strong> antes de escribir una política,
+                                preguntarme si el permiso que quiero es por fila o por columna. Si es por
+                                columna, la herramienta no es una política: es una función, y su firma es la
+                                frontera.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="nota" data-tipo="aprendizaje">
+                        <div class="nota__meta">
                             <time datetime="2026-07-31">31 jul 2026</time>
                             <span class="nota__tipo nota__tipo--aprendizaje">📚 Aprendizaje</span>
                         </div>
