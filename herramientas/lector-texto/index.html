@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lector y dictado — Herramientas — David Vázquez</title>
+    <meta name="description"
+        content="Escucha un texto en voz alta o dícta­lo con la voz. Abre archivos de texto, PDF y Word. Todo ocurre en tu navegador.">
+    <link rel="shortcut icon" href="../../resources/images/favicon.ico" type="image/x-icon">
+
+    <!-- Aplica el tema guardado ANTES de pintar, para evitar el destello
+         blanco. Debe ir antes del CSS. -->
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem("tema");
+                if (t) document.documentElement.setAttribute("data-theme", t);
+            } catch (e) { }
+        })();
+    </script>
+
+    <link rel="stylesheet" href="../../CSS/index.css">
+    <link rel="stylesheet" href="./lector.css">
+</head>
+
+<body>
+    <a href="#main" class="skip-link">Saltar al contenido</a>
+
+    <header class="site-header">
+        <!-- Cabecera de subpágina, un nivel más abajo que notas/ y
+             herramientas/: todas las rutas llevan ../../ -->
+        <nav class="nav" aria-label="Navegación principal">
+            <a href="../../index.html" class="nav__brand">DV</a>
+
+            <input type="checkbox" id="nav-toggle" class="nav__checkbox">
+            <label for="nav-toggle" class="nav__burger" aria-label="Abrir menú">
+                <span></span><span></span><span></span>
+            </label>
+
+            <ul class="nav__list nav__list--simple">
+                <li><a href="../../index.html">← Portafolio</a></li>
+                <li><a href="../../notas/index.html">Notas</a></li>
+                <li><a href="../index.html">Herramientas</a></li>
+            </ul>
+
+            <button class="nav__tema" type="button" aria-label="Cambiar tema">
+                <svg class="nav__tema-luna" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                </svg>
+                <svg class="nav__tema-sol" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="4" />
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <main id="main">
+        <section class="section">
+            <div class="section__inner">
+
+                <p class="migas"><a href="../index.html">Herramientas</a> / Lector y dictado</p>
+
+                <h1 class="section__title">Lector y dictado</h1>
+                <p class="section__lead">
+                    Pega un texto, escríbelo o abre un archivo, y escúchalo en voz alta. O al
+                    revés: dicta con la voz y quédate con el texto para copiarlo, descargarlo o
+                    imprimirlo en PDF.
+                </p>
+
+                <!-- ==========================================================
+                     ENTRADA
+                     ========================================================== -->
+                <div class="lector">
+
+                    <div class="panel">
+                        <div class="panel__head">
+                            <h2 class="panel__title">Texto</h2>
+                            <p class="panel__meta" id="contador">0 palabras · 0 caracteres</p>
+                        </div>
+
+                        <div class="acciones acciones--archivo">
+                            <label class="btn" for="archivo">
+                                Abrir archivo…
+                                <input type="file" id="archivo" class="oculto-visual"
+                                    accept=".txt,.md,.markdown,.csv,.log,.json,.pdf,.docx,text/plain,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                            </label>
+                            <button class="btn" type="button" id="btn-limpiar">Limpiar</button>
+                            <span class="formatos">txt · md · csv · json · pdf · docx</span>
+                        </div>
+
+                        <!-- Zona de arrastre: envuelve al editor para que soltar
+                             un archivo encima funcione en toda su superficie. -->
+                        <div class="zona" id="zona">
+                            <!-- Modo edición -->
+                            <textarea id="texto" class="editor" spellcheck="true"
+                                placeholder="Escribe o pega aquí el texto. También puedes arrastrar un archivo sobre esta zona, o dictar con el micrófono."
+                                aria-label="Texto a leer o dictar"></textarea>
+
+                            <!-- Modo lectura: se rellena con una <span> por
+                                 oración para poder resaltar la que suena y
+                                 saltar a cualquiera con un clic. -->
+                            <div id="vista" class="vista" hidden tabindex="0"
+                                aria-label="Vista de lectura. Haz clic en una oración para leer desde ahí."></div>
+
+                            <p class="zona__aviso" id="zona-aviso" aria-hidden="true">Suelta el archivo</p>
+                        </div>
+
+                        <p class="estado" id="estado" role="status" aria-live="polite"></p>
+                    </div>
+
+                    <!-- ======================================================
+                         LEER EN VOZ ALTA
+                         ====================================================== -->
+                    <div class="panel" id="panel-leer">
+                        <div class="panel__head">
+                            <h2 class="panel__title">Leer en voz alta</h2>
+                        </div>
+
+                        <div class="campos">
+                            <p class="campo">
+                                <label class="campo__etiqueta" for="idioma">Idioma</label>
+                                <select id="idioma" class="campo__control">
+                                    <option value="es-MX">Español (México)</option>
+                                    <option value="es-ES">Español (España)</option>
+                                    <option value="en-US">Inglés (EE. UU.)</option>
+                                    <option value="en-GB">Inglés (Reino Unido)</option>
+                                    <option value="todas">Todas las voces</option>
+                                </select>
+                            </p>
+
+                            <p class="campo campo--ancho">
+                                <label class="campo__etiqueta" for="voz">Voz</label>
+                                <select id="voz" class="campo__control">
+                                    <option value="">Cargando voces…</option>
+                                </select>
+                            </p>
+
+                            <p class="campo">
+                                <label class="campo__etiqueta" for="velocidad">
+                                    Velocidad <output id="velocidad-valor">1.0×</output>
+                                </label>
+                                <input type="range" id="velocidad" class="campo__control"
+                                    min="0.5" max="2" step="0.1" value="1">
+                            </p>
+
+                            <p class="campo">
+                                <label class="campo__etiqueta" for="tono">
+                                    Tono <output id="tono-valor">1.0</output>
+                                </label>
+                                <input type="range" id="tono" class="campo__control"
+                                    min="0.5" max="1.5" step="0.1" value="1">
+                            </p>
+                        </div>
+
+                        <div class="acciones">
+                            <button class="btn btn--primary" type="button" id="btn-leer">Leer</button>
+                            <button class="btn" type="button" id="btn-pausa" disabled>Pausar</button>
+                            <button class="btn" type="button" id="btn-detener" disabled>Detener</button>
+                        </div>
+
+                        <div class="progreso" id="progreso" hidden>
+                            <div class="progreso__barra">
+                                <span class="progreso__relleno" id="progreso-relleno"></span>
+                            </div>
+                            <p class="progreso__texto" id="progreso-texto"></p>
+                        </div>
+                    </div>
+
+                    <!-- ======================================================
+                         DICTAR
+                         ====================================================== -->
+                    <div class="panel" id="panel-dictar">
+                        <div class="panel__head">
+                            <h2 class="panel__title">Dictar</h2>
+                        </div>
+
+                        <p class="panel__nota">
+                            El dictado usa el reconocimiento de voz del navegador, que
+                            <strong>envía el audio a los servidores de Google o Microsoft</strong>
+                            para transcribirlo. Es la única parte de esta herramienta que sale de
+                            tu equipo: no dictes aquí nada confidencial.
+                        </p>
+
+                        <div class="acciones">
+                            <button class="btn btn--primary" type="button" id="btn-dictar">
+                                Empezar a dictar
+                            </button>
+                            <span class="grabando" id="grabando" hidden>
+                                <span class="grabando__punto" aria-hidden="true"></span> Escuchando…
+                            </span>
+                        </div>
+
+                        <p class="parcial" id="parcial" aria-live="polite"></p>
+                    </div>
+
+                    <!-- ======================================================
+                         SALIDA
+                         ====================================================== -->
+                    <div class="panel">
+                        <div class="panel__head">
+                            <h2 class="panel__title">Guardar el texto</h2>
+                        </div>
+
+                        <div class="acciones">
+                            <button class="btn" type="button" id="btn-copiar">Copiar</button>
+                            <button class="btn" type="button" id="btn-txt">Descargar .txt</button>
+                            <button class="btn" type="button" id="btn-pdf">Imprimir o guardar PDF</button>
+                        </div>
+
+                        <p class="panel__nota">
+                            Lo que escribas se guarda solo en este navegador y sigue aquí si
+                            cierras la pestaña. El botón de PDF abre el diálogo de impresión:
+                            elige <em>Guardar como PDF</em> en el destino.
+                        </p>
+                    </div>
+
+                </div>
+
+                <!-- ==========================================================
+                     COMPATIBILIDAD
+                     ========================================================== -->
+                <div class="soporte" id="soporte">
+                    <h2 class="soporte__titulo">Qué funciona en este navegador</h2>
+                    <ul class="soporte__lista" id="soporte-lista"></ul>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Solo esto se imprime. Se rellena desde el textarea al pulsar el botón. -->
+    <div class="impresion" id="impresion" aria-hidden="true"></div>
+
+    <footer class="site-footer">
+        <div class="site-footer__inner">
+            <p>© <span id="year">2026</span> David Vázquez</p>
+            <p class="site-footer__note"><a href="../index.html">Volver a Herramientas</a></p>
+        </div>
+    </footer>
+
+    <script src="../../js/comun.js"></script>
+    <script src="./lector.js"></script>
+</body>
+
+</html>
