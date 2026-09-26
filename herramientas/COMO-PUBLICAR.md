@@ -152,7 +152,31 @@ cómo funciona por dentro la empresa?* Si sí, reescribir el dominio en genéric
 
 ## Verificar antes del push
 
-Servir en local (`python -m http.server 8000` desde `Portafolio/`) y comprobar:
+Servir en local **con las cabeceras reales del sitio**:
+
+```bash
+node servidor-local.mjs 8000      # desde Portafolio/, con Node 18+
+```
+
+⚠️ **No usar `python -m http.server` para una herramienta que cargue scripts o abra archivos.**
+Sirve los archivos pero **no manda las cabeceras de `vercel.json`**, así que la
+Content-Security-Policy no se ejerce y la página puede funcionar perfecta en local y romperse al
+publicar. Lo peor es cómo falla: un script que la política bloquea **no lanza ningún error
+visible** — la página carga, el botón responde y no pasa nada. Solo se ve en la consola.
+
+`servidor-local.mjs` lee ese mismo `vercel.json` y aplica lo que declare, así que lo que se prueba
+es lo que se publica. `localhost` cuenta como contexto seguro, de modo que el micrófono y el
+portapapeles se comportan igual que en producción.
+
+Recordar de paso lo que la CSP implica al escribir una herramienta:
+
+| La política dice | Consecuencia |
+|---|---|
+| `script-src 'self'` | Nada de CDN. Una librería se **copia** al repositorio, en su `vendor/` |
+| `connect-src 'none'` | Ni `fetch` ni `XMLHttpRequest`. Los archivos se leen con `FileReader`, del disco |
+| `style-src 'self' 'unsafe-inline'` | Nada de hojas de estilo externas, tipografías de Google incluidas |
+
+Y comprobar:
 
 - La ficha aparece en el índice.
 - **Filtrar por otra categoría la hace desaparecer.** Si no desaparece, falta la clase
